@@ -6,10 +6,11 @@ import cn.woodwhales.rbac.common.model.param.RoleUpdateParam;
 import cn.woodwhales.rbac.common.model.vo.RoleVO;
 import cn.woodwhales.rbac.dao.entity.Role;
 import cn.woodwhales.rbac.dao.mapper.RoleMapper;
-import cn.woodwhales.rbac.service.converter.RoleConverter;
+import cn.woodwhales.rbac.service.converter.EntityToVOInterface;
 import cn.woodwhales.rbac.service.service.RoleService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.woodwhales.common.model.result.OpResult;
@@ -27,13 +28,14 @@ public class RoleServiceImpl implements RoleService {
     private RoleMapper roleMapper;
 
     @Autowired
-    private RoleConverter roleConverter;
+    @Qualifier("roleConverterImpl")
+    private EntityToVOInterface<Role, RoleVO> entityToVOInterface;
 
     @Override
     public PageRespVO<RoleVO> page(RoleQueryParam param) {
         return MybatisPlusExecutor.executeQueryPage(roleMapper, param, wrapper -> {
-            wrapper.eq(StringUtils.isNotBlank(param.getSearchInfo()), Role::getName, param.getSearchInfo());
-        }, roleConverter::convertToVO);
+            wrapper.like(StringUtils.isNotBlank(param.getSearchInfo()), Role::getName, param.getSearchInfo());
+        }, entityToVOInterface::convertToVO);
     }
 
     @Override
@@ -47,6 +49,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Transactional(rollbackFor = {Exception.class, Error.class})
     public OpResult<Void> update(RoleUpdateParam param) {
         Role role = roleMapper.selectById(param.getId());
         role.setName(param.getName());

@@ -8,6 +8,8 @@ import org.woodwhales.common.model.result.OpResult;
 import org.woodwhales.common.model.vo.PageRespVO;
 
 /**
+ * 角色接口
+ *
  * @author woodwhales
  */
 public interface RoleService {

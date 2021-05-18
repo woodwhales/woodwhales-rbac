@@ -1,7 +1,7 @@
 package cn.woodwhales.rbac.service.converter;
 
-import cn.woodwhales.rbac.common.model.vo.RoleVO;
-import cn.woodwhales.rbac.dao.entity.Role;
+import cn.woodwhales.rbac.common.model.vo.UserVO;
+import cn.woodwhales.rbac.dao.entity.User;
 import org.mapstruct.Mapper;
 
 /**
@@ -9,14 +9,14 @@ import org.mapstruct.Mapper;
  * @author woodwhales
  */
 @Mapper(componentModel = "spring")
-public interface RoleConverter extends EntityToVOInterface<Role, RoleVO> {
+public interface UserConverter extends EntityToVOInterface<User, UserVO> {
 
     /**
      * entity to VO
-     * @param role
+     * @param user
      * @return
      */
     @Override
-    RoleVO convertToVO(Role role);
+    UserVO convertToVO(User user);
 
 }
