@@ -12,6 +12,7 @@ public enum GlobalErrorEnum implements BaseRespResult {
     SUCCESS(0, "操作成功"),
     ERROR(-1, "操作失败"),
     NPE(10001, "空指针异常"),
+    REQUEST_METHOD_ERROR(10002, "请求方式错误"),
     ;
 
     private final Integer code;
