@@ -3,6 +3,7 @@ package cn.woodwhales.rbac.service.service;
 import cn.woodwhales.rbac.common.model.param.UserCreateParam;
 import cn.woodwhales.rbac.common.model.param.UserQueryParam;
 import cn.woodwhales.rbac.common.model.param.UserUpdateParam;
+import cn.woodwhales.rbac.common.model.vo.UserDetailVO;
 import cn.woodwhales.rbac.common.model.vo.UserVO;
 import org.woodwhales.common.model.result.OpResult;
 import org.woodwhales.common.model.vo.PageRespVO;
@@ -34,4 +35,11 @@ public interface UserService {
      * @return
      */
     OpResult<Void> update(UserUpdateParam param);
+
+    /**
+     * 查询用户详情
+     * @param userId
+     * @return
+     */
+    OpResult<UserDetailVO> detail(Long userId);
 }

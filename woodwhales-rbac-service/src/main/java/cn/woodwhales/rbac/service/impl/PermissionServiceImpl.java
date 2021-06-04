@@ -1,6 +1,10 @@
 package cn.woodwhales.rbac.service.impl;
 
-import cn.woodwhales.rbac.common.model.param.*;
+import cn.woodwhales.rbac.common.enums.StatusEnum;
+import cn.woodwhales.rbac.common.model.entity.BaseEntity;
+import cn.woodwhales.rbac.common.model.param.PermissionCreateParam;
+import cn.woodwhales.rbac.common.model.param.PermissionQueryParam;
+import cn.woodwhales.rbac.common.model.param.PermissionUpdateParam;
 import cn.woodwhales.rbac.common.model.vo.PermissionVO;
 import cn.woodwhales.rbac.dao.entity.Permission;
 import cn.woodwhales.rbac.dao.mapper.PermissionMapper;
@@ -32,7 +36,8 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     public PageRespVO<PermissionVO> page(PermissionQueryParam param) {
         return MybatisPlusExecutor.executeQueryPage(permissionMapper, param, wrapper -> {
-            wrapper.like(StringUtils.isNotBlank(param.getSearchInfo()), Permission::getName, param.getSearchInfo());
+            wrapper.like(StringUtils.isNotBlank(param.getSearchInfo()), Permission::getName, param.getSearchInfo())
+                   .eq(BaseEntity::getStatus, StatusEnum.VALID.getCode());
         }, entityToVOInterface::convertToVO);
     }
 

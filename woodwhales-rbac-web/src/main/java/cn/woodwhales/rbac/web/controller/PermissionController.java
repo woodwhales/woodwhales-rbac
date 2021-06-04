@@ -22,16 +22,31 @@ public class PermissionController {
     @Autowired
     private PermissionService permissionService;
 
+    /**
+     * 分页查询权限
+     * @param param
+     * @return
+     */
     @GetMapping("/page")
     public PageRespVO<PermissionVO> page(@Validated PermissionQueryParam param) {
         return permissionService.page(param);
     }
 
+    /**
+     * 创建权限
+     * @param param
+     * @return
+     */
     @PostMapping("/create")
     public RespVO<Void> create(@Validated @RequestBody PermissionCreateParam param) {
         return RespVO.resp(permissionService.create(param));
     }
 
+    /**
+     * 更新权限
+     * @param param
+     * @return
+     */
     @PostMapping("/update")
     public RespVO<Void> update(@Validated @RequestBody PermissionUpdateParam param) {
         return RespVO.resp(permissionService.update(param));

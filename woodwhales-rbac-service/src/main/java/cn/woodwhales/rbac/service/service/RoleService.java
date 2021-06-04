@@ -3,6 +3,7 @@ package cn.woodwhales.rbac.service.service;
 import cn.woodwhales.rbac.common.model.param.RoleCreateParam;
 import cn.woodwhales.rbac.common.model.param.RoleQueryParam;
 import cn.woodwhales.rbac.common.model.param.RoleUpdateParam;
+import cn.woodwhales.rbac.common.model.vo.RoleDetailVO;
 import cn.woodwhales.rbac.common.model.vo.RoleVO;
 import org.woodwhales.common.model.result.OpResult;
 import org.woodwhales.common.model.vo.PageRespVO;
@@ -34,4 +35,11 @@ public interface RoleService {
      * @return
      */
     OpResult<Void> update(RoleUpdateParam param);
+
+    /**
+     * 查询角色详情
+     * @param roleId
+     * @return
+     */
+    OpResult<RoleDetailVO> detail(Long roleId);
 }
