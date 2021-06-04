@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
         user.setUserCode(IdWorker.getIdStr());
         user.setUserPwd(SecureUtil.md5("123456"));
         userMapper.insert(user);
-        commonService.saveRolePermission(user.getId(), param.getRoleIdList());
+        commonService.saveUserRole(user.getId(), param.getRoleIdList());
         return OpResult.success();
     }
 
@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.selectById(param.getId());
         user.setUserName(param.getUserName());
         userMapper.updateById(user);
-        commonService.updateRolePermission(user.getId(), param.getRoleIdList());
+        commonService.updateUserRole(user.getId(), param.getRoleIdList());
         return OpResult.success();
     }
 

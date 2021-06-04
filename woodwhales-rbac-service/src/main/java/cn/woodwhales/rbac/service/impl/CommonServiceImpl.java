@@ -63,7 +63,7 @@ public class CommonServiceImpl implements CommonService {
             wrapper.eq(UserRole::getUserId, userId)
                     .eq(BaseEntity::getStatus, StatusEnum.VALID.getCode());
         });
-        if(isEmpty(userRoleList)) {
+        if(isNotEmpty(userRoleList)) {
             return roleMapper.selectBatchIds(DataTool.toList(userRoleList, UserRole::getRoleId, true));
         }
         return emptyList();
@@ -78,8 +78,8 @@ public class CommonServiceImpl implements CommonService {
             wrapper.eq(RolePermission::getRoleId, roleId)
                    .eq(BaseEntity::getStatus, StatusEnum.VALID.getCode());
         });
-        if(isEmpty(rolePermissionList)) {
-            return permissionMapper.selectBatchIds(DataTool.toList(rolePermissionList, RolePermission::getRoleId, true));
+        if(isNotEmpty(rolePermissionList)) {
+            return permissionMapper.selectBatchIds(DataTool.toList(rolePermissionList, RolePermission::getPermissionId, true));
         }
         return emptyList();
     }

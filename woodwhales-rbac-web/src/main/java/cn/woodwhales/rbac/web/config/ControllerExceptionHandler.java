@@ -3,6 +3,7 @@ package cn.woodwhales.rbac.web.config;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -35,11 +36,19 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler({ BindException.class })
-    public RespVO<Void> bindException(BindException exception) {
+    public RespVO<Void> exception(BindException exception) {
         log.error("exception = {}", exception.getMessage(), exception);
         String defaultMessage = exception.getAllErrors()
                                          .get(0)
                                          .getDefaultMessage();
+        return RespVO.errorWithErrorMsg(defaultMessage);
+    }
+
+    @ExceptionHandler({ MethodArgumentNotValidException.class })
+    public RespVO<Void> exception(MethodArgumentNotValidException
+        exception) {
+        log.error("exception = {}", exception.getMessage(), exception);
+        String defaultMessage = exception.getBindingResult().getAllErrors().get(0).getDefaultMessage();
         return RespVO.errorWithErrorMsg(defaultMessage);
     }
 
