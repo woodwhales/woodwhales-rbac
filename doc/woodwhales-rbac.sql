@@ -29,6 +29,13 @@ CREATE TABLE IF NOT EXISTS `rbac_permission` (
 
 -- 正在导出表  woodwhales_rbac.rbac_permission 的数据：~0 rows (大约)
 /*!40000 ALTER TABLE `rbac_permission` DISABLE KEYS */;
+INSERT INTO `rbac_permission` (`id`, `name`, `description`, `status`, `create_time`, `update_time`) VALUES
+	(1, '管理徒弟', NULL, 0, '2021-06-04 17:52:29', '2021-06-04 17:52:29'),
+	(2, '打坐念经', NULL, 0, '2021-06-04 17:53:19', '2021-06-04 17:53:19'),
+	(3, '西天取经', NULL, 0, '2021-06-04 18:09:20', '2021-06-04 18:09:20'),
+	(4, '捉妖打怪', NULL, 0, '2021-06-04 18:14:02', '2021-06-04 18:14:02'),
+	(5, '背行李', NULL, 0, '2021-06-04 18:33:57', '2021-06-04 18:33:57'),
+	(6, '逼迫师傅使出紧箍咒', NULL, 0, '2021-06-04 18:38:07', '2021-06-04 18:38:07');
 /*!40000 ALTER TABLE `rbac_permission` ENABLE KEYS */;
 
 -- 导出  表 woodwhales_rbac.rbac_role 结构
@@ -44,6 +51,11 @@ CREATE TABLE IF NOT EXISTS `rbac_role` (
 
 -- 正在导出表  woodwhales_rbac.rbac_role 的数据：~0 rows (大约)
 /*!40000 ALTER TABLE `rbac_role` DISABLE KEYS */;
+INSERT INTO `rbac_role` (`id`, `name`, `description`, `status`, `create_time`, `update_time`) VALUES
+	(1, '师傅', '师傅就是领导', 0, '2021-06-04 17:51:33', '2021-06-04 17:51:33'),
+	(2, '徒弟', '徒弟就是小弟', 0, '2021-06-04 17:51:39', '2021-06-04 17:51:39'),
+	(3, '反对师傅', '孙悟空专属角色', 0, '2021-06-04 18:16:10', '2021-06-04 18:16:10'),
+	(4, '任劳任怨', '白龙马和沙悟净专属', 0, '2021-06-04 18:33:30', '2021-06-04 18:33:30');
 /*!40000 ALTER TABLE `rbac_role` ENABLE KEYS */;
 
 -- 导出  表 woodwhales_rbac.rbac_role_permission 结构
@@ -59,6 +71,15 @@ CREATE TABLE IF NOT EXISTS `rbac_role_permission` (
 
 -- 正在导出表  woodwhales_rbac.rbac_role_permission 的数据：~0 rows (大约)
 /*!40000 ALTER TABLE `rbac_role_permission` DISABLE KEYS */;
+INSERT INTO `rbac_role_permission` (`id`, `role_id`, `permission_id`, `status`, `create_time`, `update_time`) VALUES
+	(1, 1, 1, 2, '2021-06-04 17:57:27', '2021-06-04 17:57:27'),
+	(2, 1, 2, 0, '2021-06-04 17:57:27', '2021-06-04 17:57:27'),
+	(3, 1, 1, 0, '2021-06-04 18:09:38', '2021-06-04 18:09:38'),
+	(4, 1, 3, 0, '2021-06-04 18:09:38', '2021-06-04 18:09:38'),
+	(5, 2, 3, 0, '2021-06-04 18:10:18', '2021-06-04 18:10:18'),
+	(6, 2, 4, 0, '2021-06-04 18:14:20', '2021-06-04 18:14:20'),
+	(7, 4, 5, 0, '2021-06-04 18:34:38', '2021-06-04 18:34:38'),
+	(8, 3, 6, 0, '2021-06-04 18:38:48', '2021-06-04 18:38:48');
 /*!40000 ALTER TABLE `rbac_role_permission` ENABLE KEYS */;
 
 -- 导出  表 woodwhales_rbac.rbac_user 结构
@@ -74,8 +95,14 @@ CREATE TABLE IF NOT EXISTS `rbac_user` (
   UNIQUE KEY `user_code` (`user_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
 
--- 正在导出表  woodwhales_rbac.rbac_user 的数据：~0 rows (大约)
+-- 正在导出表  woodwhales_rbac.rbac_user 的数据：~5 rows (大约)
 /*!40000 ALTER TABLE `rbac_user` DISABLE KEYS */;
+INSERT INTO `rbac_user` (`id`, `user_code`, `user_name`, `user_pwd`, `status`, `create_time`, `update_time`) VALUES
+	(1, '1400750644775718913', '孙悟空', 'e10adc3949ba59abbe56e057f20f883e', 0, '2021-06-04 17:45:53', '2021-06-04 17:45:53'),
+	(2, '1400750672709783554', '唐僧', 'e10adc3949ba59abbe56e057f20f883e', 0, '2021-06-04 17:45:59', '2021-06-04 17:45:59'),
+	(3, '1400750699377168386', '猪八戒', 'e10adc3949ba59abbe56e057f20f883e', 0, '2021-06-04 17:46:06', '2021-06-04 17:46:06'),
+	(4, '1400750742498807810', '沙悟净', 'e10adc3949ba59abbe56e057f20f883e', 0, '2021-06-04 17:46:16', '2021-06-04 17:46:16'),
+	(5, '1400750822467407874', '白龙马', 'e10adc3949ba59abbe56e057f20f883e', 0, '2021-06-04 17:46:35', '2021-06-04 17:46:35');
 /*!40000 ALTER TABLE `rbac_user` ENABLE KEYS */;
 
 -- 导出  表 woodwhales_rbac.rbac_user_role 结构
@@ -91,6 +118,19 @@ CREATE TABLE IF NOT EXISTS `rbac_user_role` (
 
 -- 正在导出表  woodwhales_rbac.rbac_user_role 的数据：~0 rows (大约)
 /*!40000 ALTER TABLE `rbac_user_role` DISABLE KEYS */;
+INSERT INTO `rbac_user_role` (`id`, `user_id`, `role_id`, `status`, `create_time`, `update_time`) VALUES
+	(1, 1, 2, 0, '2021-06-04 18:08:08', '2021-06-04 18:08:08'),
+	(2, 3, 2, 0, '2021-06-04 18:11:58', '2021-06-04 18:11:58'),
+	(3, 4, 2, 2, '2021-06-04 18:12:17', '2021-06-04 18:12:17'),
+	(4, 5, 2, 2, '2021-06-04 18:12:28', '2021-06-04 18:12:28'),
+	(5, 1, 3, 0, '2021-06-04 18:17:16', '2021-06-04 18:17:16'),
+	(6, 2, 1, 0, '2021-06-04 18:32:16', '2021-06-04 18:32:16'),
+	(7, 5, 1, 2, '2021-06-04 18:35:10', '2021-06-04 18:35:10'),
+	(8, 5, 4, 0, '2021-06-04 18:35:10', '2021-06-04 18:35:10'),
+	(9, 4, 1, 2, '2021-06-04 18:35:22', '2021-06-04 18:35:22'),
+	(10, 4, 4, 0, '2021-06-04 18:35:22', '2021-06-04 18:35:22'),
+	(11, 4, 2, 0, '2021-06-04 18:35:52', '2021-06-04 18:35:52'),
+	(12, 5, 2, 0, '2021-06-04 18:36:05', '2021-06-04 18:36:05');
 /*!40000 ALTER TABLE `rbac_user_role` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
