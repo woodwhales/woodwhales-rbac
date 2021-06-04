@@ -52,4 +52,11 @@ public interface CommonService {
      * @param permissionIdList
      */
     void updateRolePermission(Long roleId, List<Long> permissionIdList);
+
+    /**
+     * 根据角色集合获取权限集合
+     * @param roleList
+     * @return
+     */
+    List<Permission> getPermissionListByRoleList(List<Role> roleList);
 }

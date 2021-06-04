@@ -8,6 +8,7 @@ import cn.woodwhales.rbac.common.model.param.UserQueryParam;
 import cn.woodwhales.rbac.common.model.param.UserUpdateParam;
 import cn.woodwhales.rbac.common.model.vo.UserDetailVO;
 import cn.woodwhales.rbac.common.model.vo.UserVO;
+import cn.woodwhales.rbac.dao.entity.Permission;
 import cn.woodwhales.rbac.dao.entity.Role;
 import cn.woodwhales.rbac.dao.entity.User;
 import cn.woodwhales.rbac.dao.mapper.UserMapper;
@@ -78,6 +79,7 @@ public class UserServiceImpl implements UserService {
     public OpResult<UserDetailVO> detail(Long userId) {
         User user = userMapper.selectById(userId);
         List<Role> roleList = commonService.getRoleListByUserId(userId);
-        return OpResult.success(PojoConverterTool.buildUserDetailVO(user, roleList));
+        List<Permission> permissionList = commonService.getPermissionListByRoleList(roleList);
+        return OpResult.success(PojoConverterTool.buildUserDetailVO(user, roleList, permissionList));
     }
 }

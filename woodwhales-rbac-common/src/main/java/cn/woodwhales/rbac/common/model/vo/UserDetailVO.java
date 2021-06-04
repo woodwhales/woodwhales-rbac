@@ -18,4 +18,9 @@ public class UserDetailVO extends UserVO {
      */
     private List<RoleSimpleVO> roleList;
 
+    /**
+     * 权限集合
+     */
+    private List<PermissionSimpleVO> permissionList;
+
 }

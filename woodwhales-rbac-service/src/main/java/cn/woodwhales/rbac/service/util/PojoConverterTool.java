@@ -29,10 +29,11 @@ public class PojoConverterTool {
         return roleSimpleVO;
     }
 
-    public static UserDetailVO buildUserDetailVO(User user, List<Role> roleList) {
+    public static UserDetailVO buildUserDetailVO(User user, List<Role> roleList, List<Permission> permissionList) {
         UserDetailVO userDetailVO = new UserDetailVO();
         BeanUtils.copyProperties(user, userDetailVO);
         userDetailVO.setRoleList(toList(roleList, PojoConverterTool::buildRoleSimpleVO));
+        userDetailVO.setPermissionList(toList(permissionList, PojoConverterTool::buildPermissionSimpleVO));
         return userDetailVO;
     }
 

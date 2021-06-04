@@ -163,6 +163,21 @@ public class CommonServiceImpl implements CommonService {
         deleteRolePermission(deleteRolePermissionList);
     }
 
+    @Override
+    public List<Permission> getPermissionListByRoleList(List<Role> roleList) {
+        if(isEmpty(roleList)) {
+            return emptyList();
+        }
+        List<Long> roleIdList = DataTool.toList(roleList, Role::getId, true);
+        List<RolePermission> rolePermissionList = MybatisPlusExecutor.executeQueryList(rolePermissionMapper, wrapper ->
+            wrapper.in(RolePermission::getRoleId, roleIdList)
+                   .eq(BaseEntity::getStatus, StatusEnum.VALID.getCode()));
+        if(isEmpty(rolePermissionList)) {
+            return emptyList();
+        }
+        return permissionMapper.selectBatchIds(DataTool.toList(rolePermissionList, RolePermission::getPermissionId, true));
+    }
+
     private void deleteRolePermission(List<RolePermission> deleteRolePermissionList) {
         if(isNotEmpty(deleteRolePermissionList)) {
             for (RolePermission rolePermission : deleteRolePermissionList) {
